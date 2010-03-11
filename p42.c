@@ -22,10 +22,6 @@ int word_to_num(const char* word) {
     return sum;
 }
 
-/* Triangle numbers have the form T = 0.5n(n+1)
- * So, if 'S' is a triangle number,  S = 0.5n^2 + 0.5
- * S - 0.5 = 0.5n^2
- * sqrt( 2S - 1 ) = n   yields integer n */
 int is_trinum(int num) {
     int cur_trinum = 1, i = 2;
     // find first trinum >= the number
