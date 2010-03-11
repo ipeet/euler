@@ -47,7 +47,7 @@ int cycle_len(int val) {
 	    return 0;
 	} if( remainders[cur_remainder] ) {
 	    /* If we've seen this remainder before, the cycle length is the difference
-	     * between the current digit and the last seen digit */
+	     * between the curent digit and the last seen digit */
 	    return cur_digit - remainders[cur_remainder];
 	} else {
 	    // Touch this remainder
