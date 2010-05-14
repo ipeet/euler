@@ -27,7 +27,7 @@ unsigned int pal_bin[PAL_BIN_SZ] =
 #define DEC_DIG_SZ	10
 unsigned char dec_digits[DEC_DIG_SZ] = 
 {
-	0,0,0,0,0
+	0,0,0,0,0,
 	0,0,0,0,0
 };
 	
@@ -48,7 +48,7 @@ unsigned int is_dec_pal(unsigned int val) {
 unsigned long soln_sum = 0;
 
 unsigned int try_combos(int st_ind, unsigned int cur_val) {
-	if((cur_val<1000000)is_dec_pal(cur_val)) {
+	if((cur_val<1000000) && is_dec_pal(cur_val)) {
 		soln_sum += cur_val;
 		if(st_ind<(PAL_BIN_SZ-1)) {
 			try_combos(st_ind+1,cur_val);
@@ -58,4 +58,9 @@ unsigned int try_combos(int st_ind, unsigned int cur_val) {
 	if(is_dec_pal(cur_val)) {
 		
 	}
+}
+
+int main() {
+    #warning TODO: finish this problem
+    return 0;
 }
