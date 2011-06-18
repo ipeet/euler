@@ -7,7 +7,7 @@ How many circular primes are there below one million?
 */
 
 #include <stdio.h>
-#include "prime.h"
+#include "calc_primes.h"
 
 #define LIMIT 1000000
 

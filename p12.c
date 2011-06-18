@@ -18,7 +18,7 @@ What is the value of the first triangle number to have over five hundred divisor
 */
 #include <stdlib.h>
 #include <stdio.h>
-#include "prime.h"
+#include "calc_primes.h"
 
 
 unsigned int tri_num(int n) {

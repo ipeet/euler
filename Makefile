@@ -3,29 +3,44 @@
 
 CC=gcc
 CFLAGS=-O2 -g3
-INCLUDES=-I/usr/include/ipmath
-LIBS=-lm -lipmath
+INCLUDES=
+LIBS=-lm
 .SECONDEXPANSION: 
+OBJDIR= obj
 
+# Sources which should be compiled and linked with all problems
+# (Needed or not, won't worry about that too much)
+COMMON_SRCS= \
+    calc_primes.c
+COMMON_OBJS=$(patsubst %.c,$(OBJDIR)/%.o,$(COMMON_SRCS))
 
-CC_SRCS=$(wildcard *.c)
-CC_BINARIES=$(patsubst %.c,%,$(CC_SRCS))
-BINARIES+=$(CC_BINARIES)
+# All the files containing main functions and logic for each problem
+PROB_SRCS=$(wildcard p*.c)
+PROB_OBJS=$(patsubst %.c,$(OBJDIR)/%.o,$(PROB_SRCS))
+
+BINARIES=$(patsubst %.c,%,$(PROB_SRCS))
 
 .phony=all
 all: $(BINARIES)
 
-$(CC_BINARIES): $(patsubst %,%.c,$$(@))
-	$(CC) $(CFLAGS) $(INCLUDES) $(patsubst %,%.c,$(@)) $(LIBS) -o $(@)
+# Object compilation logic
+$(PROB_OBJS) $(COMMON_OBJS): $$(patsubst $(OBJDIR)/%.o,%.c,$$(@)) $(OBJDIR)
+	$(CC) $(CFLAGS) $(INDLUDES) -c $< -o $@
+
+$(OBJDIR): ; mkdir $@
+
+$(BINARIES): $$(patsubst %,$(OBJDIR)/%.o,$$(@)) $(COMMON_OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
 
 .phony=clean
-clean: ; rm -f $(BINARIES)
+clean: 
+	rm -f $(BINARIES)
+	rm -f obj/*.o
 
 .phony=debug_vars
 
 debug_vars:
-	@echo CC_SRCS: $(CC_SRCS)
-	@echo CC_BINARIES: $(CC_BINARIES)
+	@echo PROB_SRCS: $(PROB_SRCS)
 	@echo BINARIES: $(BINARIES)
 
 
